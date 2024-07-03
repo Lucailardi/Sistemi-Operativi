@@ -4,7 +4,7 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 public class Main {
-	static int N_THREAD=5;
+	static int N_CLIENTI=5;
 
     public static void main(String[] args) {
         BlockingQueue<Ordine> ordini = new LinkedBlockingQueue<>();
@@ -16,7 +16,7 @@ public class Main {
         cucina.start();
         cameriere.start();
 
-        for (int i = 1; i <= N_THREAD; i++) {
+        for (int i = 1; i <= N_CLIENTI; i++) {
             new Thread(new Cliente(i, ordini)).start();
         }
 
