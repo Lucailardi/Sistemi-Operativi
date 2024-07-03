@@ -26,7 +26,8 @@ public class Cameriere implements Runnable {
                 Thread.sleep((int)(Math.random() * 5000));
             }
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            Thread.currentThread().interrupt();
+            System.out.println("Thread interrotto a causa di un'eccezione");
         }
     }
 }
