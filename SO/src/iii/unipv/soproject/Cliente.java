@@ -24,6 +24,8 @@ public class Cliente implements Runnable {
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
             logger.log(Level.WARNING, "Thread Cliente " + id + " interrotto", e);
+        } finally {
+        	logger.info("Thread Cliente " + id + " è stato chiuso");
         }
     }
 }
