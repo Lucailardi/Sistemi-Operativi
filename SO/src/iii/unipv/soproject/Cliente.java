@@ -1,8 +1,11 @@
 package iii.unipv.soproject;
 
 import java.util.concurrent.BlockingQueue;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 
 public class Cliente implements Runnable {
+    private static final Logger logger = Logger.getLogger(Cliente.class.getName());
     private int id;
     private BlockingQueue<Ordine> ordini;
 
@@ -14,15 +17,13 @@ public class Cliente implements Runnable {
     @Override
     public void run() {
         try {
-            // Il cliente fa un ordine
             Ordine ordine = new Ordine("Ordine del Cliente " + id);
-            System.out.println("Cliente " + id + " fa un ordine: " + ordine.getDescrizione());
+            logger.info("Cliente " + id + " fa un ordine: " + ordine.getDescrizione());
             ordini.put(ordine);
-
-            // Simula il tempo di attesa del cliente
             Thread.sleep((int)(Math.random() * 10000));
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            Thread.currentThread().interrupt();
+            logger.log(Level.WARNING, "Thread Cliente " + id + " interrotto", e);
         }
     }
 }

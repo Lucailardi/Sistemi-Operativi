@@ -1,8 +1,11 @@
 package iii.unipv.soproject;
 
 import java.util.concurrent.BlockingQueue;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 
 public class Cucina implements Runnable {
+    private static final Logger logger = Logger.getLogger(Cucina.class.getName());
     private BlockingQueue<Ordine> ordiniDaPreparare;
 
     public Cucina(BlockingQueue<Ordine> ordiniDaPreparare) {
@@ -12,18 +15,15 @@ public class Cucina implements Runnable {
     @Override
     public void run() {
         try {
-            while (true) {
-                // La cucina prepara un ordine
+            while (!Thread.currentThread().isInterrupted()) {
                 Ordine ordine = ordiniDaPreparare.take();
-                System.out.println("Cucina prepara: " + ordine.getDescrizione());
-
-                // Simula il tempo di preparazione dell'ordine
+                logger.info("Cucina prepara: " + ordine.getDescrizione());
                 Thread.sleep((int)(Math.random() * 10000));
-
-                System.out.println("Cucina ha preparato: " + ordine.getDescrizione());
+                logger.info("Cucina ha preparato: " + ordine.getDescrizione());
             }
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            Thread.currentThread().interrupt();
+            logger.log(Level.INFO, "Thread Cucina interrotto");
         }
     }
 }

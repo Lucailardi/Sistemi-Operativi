@@ -1,8 +1,11 @@
 package iii.unipv.soproject;
 
 import java.util.concurrent.BlockingQueue;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 
 public class Cameriere implements Runnable {
+    private static final Logger logger = Logger.getLogger(Cameriere.class.getName());
     private BlockingQueue<Ordine> ordini;
     private BlockingQueue<Ordine> ordiniDaPreparare;
 
@@ -14,19 +17,15 @@ public class Cameriere implements Runnable {
     @Override
     public void run() {
         try {
-            while (true) {
-                // Il cameriere prende un ordine dal cliente
+            while (!Thread.currentThread().isInterrupted()) {
                 Ordine ordine = ordini.take();
-                System.out.println("Cameriere prende: " + ordine.getDescrizione());
-
-                // Il cameriere porta l'ordine in cucina
+                logger.info("Cameriere prende: " + ordine.getDescrizione());
                 ordiniDaPreparare.put(ordine);
-
-                // Simula il tempo di servizio del cameriere
                 Thread.sleep((int)(Math.random() * 5000));
             }
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            Thread.currentThread().interrupt();
+            logger.log(Level.INFO, "Thread Cameriere interrotto");
         }
     }
 }
