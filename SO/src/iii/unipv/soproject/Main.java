@@ -2,7 +2,6 @@ package iii.unipv.soproject;
 
 import java.util.concurrent.*;
 import java.util.logging.Logger;
-import java.util.logging.Level;
 
 public class Main {
     static int N_CLIENTI = 5;

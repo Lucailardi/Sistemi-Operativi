@@ -1,6 +1,7 @@
 package iii.unipv.soproject;
 
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
@@ -18,11 +19,12 @@ public class Cucina implements Runnable {
             while (!Thread.currentThread().isInterrupted()) {
                 Ordine ordine = ordiniDaPreparare.take();
                 logger.info("Cucina prepara: " + ordine.getDescrizione());
-                Thread.sleep((int)(Math.random() * 10000));
+                Thread.sleep(ThreadLocalRandom.current().nextInt(10000));
                 logger.info("Cucina ha preparato: " + ordine.getDescrizione());
             }
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
+        }finally {
             logger.log(Level.INFO, "Thread Cucina interrotto");
         }
     }

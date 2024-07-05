@@ -1,6 +1,7 @@
 package iii.unipv.soproject;
 
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
@@ -21,10 +22,11 @@ public class Cameriere implements Runnable {
                 Ordine ordine = ordini.take();
                 logger.info("Cameriere prende: " + ordine.getDescrizione());
                 ordiniDaPreparare.put(ordine);
-                Thread.sleep((int)(Math.random() * 5000));
+                Thread.sleep(ThreadLocalRandom.current().nextInt(5000));
             }
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
+        }finally {
             logger.log(Level.INFO, "Thread Cameriere interrotto");
         }
     }
