@@ -6,7 +6,7 @@ import java.util.logging.Logger;
 public class Main {
     private static final Logger logger = Logger.getLogger(Main.class.getName());
     private static final int NUM_CLIENTI_INIZIALE = 5;
-    private static final int NUM_CLIENTI_FINALE = 10;
+    private static final int NUM_CLIENTI_FINALE = 20;
 
     public static void main(String[] args) {
         BlockingQueue<Ordine> ordini = new LinkedBlockingQueue<>();
