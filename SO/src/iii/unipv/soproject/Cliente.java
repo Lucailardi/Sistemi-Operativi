@@ -26,7 +26,6 @@ public class Cliente implements Runnable {
             if (listener != null) {
                 listener.handleEvent("Cliente " + id + " ha fatto un ordine.", EventListener.EventType.CLIENTE);
             }
-            Thread.sleep(ThreadLocalRandom.current().nextInt(10000));
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
             logger.log(Level.WARNING, "Thread Cliente " + id + " interrotto", e);
