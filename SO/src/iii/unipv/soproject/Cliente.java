@@ -1,7 +1,6 @@
 package iii.unipv.soproject;
 
 import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.ThreadLocalRandom;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
